@@ -33,6 +33,7 @@ app.get('/gia-vang', async (req, res) => {
 
         res.json({
             "time": new Date().toLocaleString(),
+            "total": goldPrices.length,
             "data": goldPrices,
             "author": "Theodore Myker"
         });
