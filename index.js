@@ -34,6 +34,7 @@ app.get('/gia-vang', async (req, res) => {
         res.json({
             "time": new Date().toLocaleString(),
             "data": goldPrices,
+            "author": "Theodore Myker"
         });
     } catch (error) {
         console.error(error);
