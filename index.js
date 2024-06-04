@@ -6,7 +6,11 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-    res.status(200).send("Hello, This API will update realtime price gold in Vietnam, exactly");
+    var rs = "<div> Guildline </div>"
+    rs += "<div>Hello, This API will update realtime price gold in Vietnam, exactly</div>"
+    rs+= "<div>Endpoint: https://gia-vang-sjc.vercel.app/gia-vang"
+   // res.status(200).send("Hello, This API will update realtime price gold in Vietnam, exactly");
+    res.status(200).send(rs);
 });
 
 
