@@ -19,6 +19,18 @@ app.get('/gia-vang', async (req, res) => {
         const {data} = await axios.get('https://sjc.com.vn/giavang/textContent.php');
         const $ = cheerio.load(data);
 
+        const updateTimeText = $('.w350.m5l.float_left.red_text.bg_white').text().trim();
+
+        const updateTime = new Date(updateTimeText.replace(
+            /(\d{2}):(\d{2}):(\d{2}) (AM|PM) (\d{2})\/(\d{2})\/(\d{4})/,
+            (match, p1, p2, p3, p4, p5, p6, p7) => {
+                let hour = parseInt(p1);
+                if (p4 === 'PM' && hour !== 12) hour += 12;
+                if (p4 === 'AM' && hour === 12) hour = 0;
+                return `${p7}-${p6}-${p5}T${hour.toString().padStart(2, '0')}:${p2}:${p3}`;
+            }
+        ));
+
         const goldPrices = [];
 
         $('table tr').each((i, element) => {
@@ -36,7 +48,7 @@ app.get('/gia-vang', async (req, res) => {
         });
 
         res.json({
-            "time": new Date().toLocaleString(),
+            "time": updateTimeText,
             "total": goldPrices.length,
             "data": goldPrices,
             "author": "Theodore Myker"
