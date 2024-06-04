@@ -5,6 +5,11 @@ const axios = require('axios');
 const app = express();
 const port = 3000;
 
+app.get("/", (req, res) => {
+    res.status(200).send("Hello, This API will update realtime price gold in Vietnam, exactly");
+});
+
+
 app.get('/gia-vang', async (req, res) => {
     try {
         const {data} = await axios.get('https://sjc.com.vn/giavang/textContent.php');
